@@ -844,7 +844,7 @@ instance shortlinClobber (hb : HexBoard) : Short (hex hb) := by
   dsimp [hex]
   infer_instance
 
-#eval decide (hex ExHexBoard ≈ 0)
+--#eval decide (hex ExHexBoard ≈ 0)
 
 #check 0
 
