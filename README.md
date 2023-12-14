@@ -1,48 +1,107 @@
-# Title
+# MATH 681 - Combinatorial Game Theory Implementations
+By Owen Randall
 
-Replace `Title` with the title of your project, and *rewrite* this markdown file to describe the following:
+# Combinatorial Game Theory (CGT)
 
-1. The topic of your project. State the relevant background, definitions, and theorems, using natural language. Add any necessary references.
-2. The structure of the lean project itself. How is your code organized?
-3. The main definitions you constructed and/or theorems you formalized, and where they can be found in your code.
-4. Any other relevant information.
+CGT was first introduced by John Conway in *On Numbers and Games* [1] where the structure of a combinatoral game was first formalized. 
+An interesting property of this formalization is that we are now able to attribute values to game positions, which describe the outcome of optimal play on the position.
+Using these values, a partial ordering of games can be constructed, and arithmetic can be performed to determine the values of compositions of games.
 
-# Using this template
+Typically the games studied by CGT have the following properties:
+1. There are two players.
+2. Moves are sequential (players take turns making moves rather than moving simultaneously).
+3. Both players have perfect information (the entire game state is known, there are no elements of chance).
+4. The player who makes the last move in the game wins.
 
-To use this template, go to its [github page](https://github.com/Formal-Mathematics/final_project_template), and click the green "Use this template" button near the top-right of the page.
-Then follow the instructions to create a new repository using the template.
-Once you have done this, you should have a repository in your github account with some name that I will assume to be `final_project`.
-Clone this repository to your local machine using `git clone` to start working on your project.
+Many popular games conform to these requirements such as chess, hex, connect 4, othello, gomoku, checkers, etc.
+Even some games which do not conform to these rules can use CGT to analyze positions, for example Go does not satisfy 4. in general, but CGT has been used to analyze Go endgame results [2].
 
-# Updating Mathlib
+Here is some basic terminology and notation used in CGT:
+- Player 1 = Left = Black = X
+- Player 2 = Right = White = O
+- Partisan games are games where players have access to different legal moves or their moves have different effects on the game state (any game that assign different coloured pieces to each player among others)
+- Impartial games are games where players both have access to the same set of legal moves (e.g. nim, chomp, hackenbush, etc.)
+- G = {GL_1, GL_2, ... | GR_1, GR_2, ...} is the notation for a game G where Left can move to game GL_1 or GL_2 etc. and Right can move to GR_1 or GR_2 etc.
 
-This template repository depends on `mathlib4`.
-When you first clone the repository, you will need to run
+The value of a game corresponds to the outcome of the game if both players play optimally.
+If G = 0, the second player wins.
+If G > 0, Left wins as the first or second player.
+If G < 0, Right wins as the first or second player.
+If G ‖ 0, (pronounced G is fuzzy with 0) the first player wins.
 
-```bash
-lake exe cache get
-```
+Addition on games is defined as:
+G + H = {GL_1+H, GL_2+H, ... | GR_1+H, GR_2+H, ...}
+Negation on games is defined as:
+-G = {-GR_1, -GR_2, ... | -GL_1, -GL_2, ...}
+Multiplication and division are also defined, but that is out of scope for this project
 
-in the main directory of the project to obtain the `mathlib4` cache.
+But in practice, many games can be simplified to numerical values where the normal rules of addition and negation apply.
+Examples:
+{|} = 0
+{n|} = n+1 where n >= 0
+{|n} = n-1 where n <= 0
+{n|n+1} = (2n+1)/2 where n >= 0
+{n-1|n} = (2n-1)/2 where n <= 0
 
-If you need to update mathlib, you can do so by running
+This makes CGT useful in practice for analysis of games which decompose into independent sub-games. 
+For example, assume that the expression b^d approximates the search tree size required to solve a game G, where b is the average branching factor of the tree and d is the average depth of the leaf nodes.
+Now lets say this game decomposes into two equal independent subgames, CGT analysis allows us to cut the search tree size down from b^d to 2*(b/2)^d, and that's assuming there are no more game decompositions to be made.
+A good practical example of CGT analysis exponentially outpreforming traditional search was made in the PhD thesis of U of A Professor Martin Mueller [3].
 
-```bash
-lake update mathlib
-```
+There is much more to CGT, such as temperature, infinitesimals, tracendentals, ordinals and more, but none of this is necessary knowledge to understand the basics of CGT.
 
-in the main directory of the project.
-Alternatively, you can use the lean4 vscode extension to do this for you.
-To use the vscode extension, click the "forall" icon at the top-right of the editor window when you have a lean4 file from your project open. 
+# Games Implemented
 
-# Project structure
+Looking through the existing CGT library in Mathlib, I saw that there was only one game implemented so far, which is understandable as the library is quite small at this point.
+There are comments throughout several files in the library calling stating that the future work for this library should be to implement more games (specifically hex was mentioned), so I knew this would be my course project.
+The existing game is called Domineering, a partisan game where players take turn placing 2x1 or 1x2 dominoe pieces until no legal moves are remaining.
+This is a commonly used game for teaching CGT as you can easily construct various numbers for example:
+(⬜ represents an empty square of a domineering board)
 
-This template is set up with a `Project.lean` file in the root directory, and a `Project` folder where additional lean files can be placed.
-If you decide to change the name `Project` to something else, you will need to edit the `lakefile.lean` file accordingly.
+⬜
+⬜ = 1
 
-# Submitting your final project
+⬜⬜ = -1
 
-To submit your final project, just send the instructor the URL of your project's github repository.
-If you set the repository to be *private*, then you may need to grant the instructor access to the repository.
+⬜
+⬜
+⬜⬜ = {-1,0|1} = 1/2
 
-**NOTE:** It is recommended that you make your project's repository public unless you are sufficiently experienced with github's user permission system.
+⬜
+⬜⬜ = {0|0} = * (pronounced star, is fuzzy with 0)
+
+I wanted to implement more challenging games than Domineering for my course project, but I figured I should start off with an easy game.
+The first game implemented is an impartial game called Chomp, where players take turns removing chunks of the board until there is nothing left.
+The game normally starts out as a rectangular board.
+A move consists of choosing any point on the board, and the move causes that point, and every point above or to the right of the move to disapear.
+There is an initial 'poisoned square' as the bottom left point on the board which neither player can make a move on.
+Example 3x4 game:
+
+⬜⬜⬜⬜
+⬜⬜⬜⬜
+🟩⬜⬜⬜
+
+Player 1 moves at (1,1):
+
+⬜
+⬜
+🟩⬜⬜⬜
+
+Player 2 moves at (0,1):
+
+🟩⬜⬜⬜
+
+Player 1 moves at (1,0) and wins.
+
+In the implementation of Chomp, I used a Finset of (ℤ × ℤ) points to represent the points on the board, and the poisoned square was excluded as it is not a legal move.
+To implement the rules of Chomp, I used the Finset.filter functionality to remove any points above or to the right of a move.
+
+The next game implemented is Linear Clobber, a 2 dimensional variation of the game Clobber. Linear Clobber is a partisan game where the game starts with all the black and white stones already placed on the board.
+Players then make moves by 'clobbering' the opponent stones, where they move on of their stones onto an adjacent opponent stone, capturing it.
+◯⬤
+
+# Bibliography
+
+1. Conway, John H. 1976. On Numbers and Games. London: Academic Press.
+2. Berlekamp, Elwyn and Wolfe, David. 1994. Mathematical Go - chilling gets the last point. 10.1201/9781439863558. 
+3. Mueller, Martin. 1999. Decomposition search: a combinatorial games approach to game tree search, with applications to solving go endgames. In Proceedings of the 16th international joint conference on Artifical intelligence - Volume 1 (IJCAI'99). 578–583.
