@@ -81,19 +81,14 @@ There is an initial 'poisoned square' as the bottom left point on the board whic
 Example 3x4 game:
 
 
-⬜⬜⬜⬜
-
-⬜⬜⬜⬜
-
+⬜⬜⬜⬜\
+⬜⬜⬜⬜\
 🟩⬜⬜⬜
-
 
 Player 1 moves at (1,1):
 
-⬜
-
-⬜
-
+⬜\
+⬜\
 🟩⬜⬜⬜
 
 
