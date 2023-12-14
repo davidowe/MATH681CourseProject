@@ -45,7 +45,7 @@ Examples:
 
 This makes CGT useful in practice for analysis of games which decompose into independent sub-games. 
 For example, assume that the expression b^d approximates the search tree size required to solve a game G, where b is the average branching factor of the tree and d is the average depth of the leaf nodes.
-Now lets say this game decomposes into two equal independent subgames, CGT analysis allows us to cut the search tree size down from b^d to 2*(b/2)^d, and that's assuming there are no more game decompositions to be made.
+Now lets say this game decomposes into two equal independent subgames, CGT analysis allows us to cut the search tree size down from b^d to 2*(b/2)^d, and that is assuming there are no more game decompositions to be made.
 A good practical example of CGT analysis exponentially outpreforming traditional search was made in the PhD thesis of U of A Professor Martin Mueller [3].
 
 There is much more to CGT, such as temperature, infinitesimals, tracendentals, ordinals and more, but none of this is necessary knowledge to understand the basics of CGT.
@@ -101,12 +101,47 @@ Player 1 moves at (1,0) and wins.
 In the implementation of Chomp, I used a Finset of (ℤ × ℤ) points to represent the points on the board, and the poisoned square was excluded as it is not a legal move.
 To implement the rules of Chomp, I used the Finset.filter functionality to remove any points above or to the right of a move.
 
-The next game implemented is Linear Clobber, a 2 dimensional variation of the game Clobber. Linear Clobber is a partisan game where the game starts with all the black and white stones already placed on the board.
+The next game implemented is Linear Clobber, a one dimensional variation of the game Clobber. Linear Clobber is a partisan game where the game starts with all the black and white stones already placed on the board.
 Players then make moves by 'clobbering' the opponent stones, where they move on of their stones onto an adjacent opponent stone, capturing it.
-◯⬤
+
+Example game:\
+◯⬤◯⬤◯⬤\
+Black moves:\
+\_◯◯⬤◯⬤\
+White moves:\
+\_◯◯\_⬤⬤\
+White wins as there are no legal moves left for black.
+
+This is an interesting game for CGT analysis as games tend to decompose into independent subgames very quickly, giving a large adge to using CGT analysis over traditional search.
+Another interesting property of Clobber is that it is an all-small game [4], which means that the value of any position in Clobber is infinitesimal.
+I chose Linear Clobber over normal 2d Clobber because the implementation would be very similar, but much shorter and less tedious.
+I am in the midst of completing a paper proving that any position of the form (◯⬤)^n ‖ 0, where n > 0 and n ≠ 3.
+
+The implementation of Linear Clobber was much more difficult than chomp or domineering, as the legal moves depend not on the empty points of the board, but rather on adjacent stones of opposite color.
+This means we need to keep track of the white and black stones, and modify the configuration of both when moves are made.
+The positions of pieces are stored as a Finset of integers, and moves are represented by an integer pair (ℤ × ℤ), where the first integer is the direction of the move (-1 for left, 1 for right), and the second integer is the position of the stone being moved.
+I then implemented a black move by erasing the stone being moved from the black stones, inserting a stone at the position the stone would be moved to, and removing the white stone at the point where the black stone moved to (vice-versa for white moves).
+Proving turn bounds and shortness were difficult due to these complicated rules so I needed to implement many lemmas and theorems in order to break up the problem into smaller chunks.
+
+Hex is the final game implemented in this course project, and was specifically requested by the comments in the existing CGT library.
+Hex is a partisan game played on a four-sided board made up of hexagons, where the black tries to connect the top of the board to the bottom, and white tries to connect the left side of the board to the right. 
+
+Example 3x3 board:\
+⬡ ⬡ ⬡\
+ ⬡ ⬡ ⬡\
+  ⬡ ⬡ ⬡
+This would be considered a win for black:
+Example 3x3 board:\
+⬡ ⬤ ◯\
+ ◯ ⬤ ⬤\
+  ⬡ ◯ ⬤
+
+The legal moves for each player in Hex is simply the empty points on the board, however the terminal condition of the game is complicated. In all the games implemented up to this point, the game is played until there are no moves left at which point the last player to have moved wins. In Hex, the terminal condition is connected the sides of the board rather than just running out of move. Fortunately, we can represent the special termination condition when generating the legal moves after a move is played. If no side connected is made, the legal moves are all the empty points on the board. If a side connection is found, then there are no legal moves. I used the SimpleGraph library in mathlib to check for side connections which was a very interesting learning experience.
 
 # Bibliography
 
 1. Conway, John H. 1976. On Numbers and Games. London: Academic Press.
-2. Berlekamp, Elwyn and Wolfe, David. 1994. Mathematical Go - chilling gets the last point. 10.1201/9781439863558. 
+2. Berlekamp, Elwyn & Wolfe, David. 1994. Mathematical Go - chilling gets the last point. 10.1201/9781439863558. 
 3. Mueller, Martin. 1999. Decomposition search: a combinatorial games approach to game tree search, with applications to solving go endgames. In Proceedings of the 16th international joint conference on Artifical intelligence - Volume 1 (IJCAI'99). 578–583.
+4. Albert, Michael & Grossman, J.P. & Nowakowski, Richard & Wolfe, David. 2005. An introduction to Clobber. Integers. 5. 
+5. Demer, Eric & Selinger, Peter & Wang, Kyle. 2021. All passable games are realizable as monotone set coloring games.
