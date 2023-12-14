@@ -58,19 +58,19 @@ The existing game is called Domineering, a partisan game where players take turn
 This is a commonly used game for teaching CGT as you can easily construct various numbers for example:
 (⬜ represents an empty square of a domineering board)
 
-⬜\n
+⬜\
 ⬜ = 1
 
 
 ⬜⬜ = -1
 
 
-⬜\n
-⬜\n
+⬜\
+⬜\
 ⬜⬜ = {-1,0|1} = 1/2
 
 
-⬜\n
+⬜\
 ⬜⬜ = {0|0} = * (pronounced star, is fuzzy with 0)
 
 I wanted to implement more challenging games than Domineering for my course project, but I figured I should start off with an easy game.
