@@ -122,17 +122,13 @@ Hex is the final game implemented in this course project, and was specifically r
 Hex is a partisan game played on a four-sided board made up of hexagons, where the black tries to connect the top of the board to the bottom, and white tries to connect the left side of the board to the right. 
 
 Example 3x3 board:\
-<pre>
 ⬡ ⬡ ⬡\
-  ⬡ ⬡ ⬡\
-    ⬡ ⬡ ⬡\
-</pre>
+&nbsp;⬡ ⬡ ⬡\
+&nbsp;&nbsp;⬡ ⬡ ⬡\
 This would be considered a win for black:\
-<pre>
 ⬡ ⬤ ◯\
-  ◯ ⬤ ⬤\
-    ⬡ ◯ ⬤
-</pre>
+&nbsp;◯ ⬤ ⬤\
+&nbsp;&nbsp;⬡ ◯ ⬤
 
 The legal moves for each player in Hex is simply the empty points on the board, however the terminal condition of the game is complicated. In all the games implemented up to this point, the game is played until there are no moves left at which point the last player to have moved wins. In Hex, the terminal condition is connected the sides of the board rather than just running out of move. Fortunately, we can represent the special termination condition when generating the legal moves after a move is played. If no side connected is made, the legal moves are all the empty points on the board. If a side connection is found, then there are no legal moves. I used the SimpleGraph library in mathlib to check for side connections which was a very interesting learning experience.
 
