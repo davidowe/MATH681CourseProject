@@ -121,11 +121,11 @@ Proving turn bounds and shortness were difficult due to these complicated rules 
 Hex is the final game implemented in this course project, and was specifically requested by the comments in the existing CGT library.
 Hex is a partisan game played on a four-sided board made up of hexagons, where the black tries to connect the top of the board to the bottom, and white tries to connect the left side of the board to the right. 
 
-Example 3x3 board:\
+Example empty 3x3 board:\
 ⬡ ⬡ ⬡\
 &nbsp;&nbsp;⬡ ⬡ ⬡\
 &nbsp;&nbsp;&nbsp;&nbsp;⬡ ⬡ ⬡\
-This would be considered a win for black:\
+This would be considered a win for black as there is a connection from top to bottom via adjacent black stones:\
 ⬡ ⬤ ◯\
 &nbsp;&nbsp;◯ ⬤ ⬤\
 &nbsp;&nbsp;&nbsp;&nbsp;⬡ ◯ ⬤
