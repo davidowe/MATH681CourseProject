@@ -24,24 +24,24 @@ Here is some basic terminology and notation used in CGT:
 - G = {GL_1, GL_2, ... | GR_1, GR_2, ...} is the notation for a game G where Left can move to game GL_1 or GL_2 etc. and Right can move to GR_1 or GR_2 etc.
 
 The value of a game corresponds to the outcome of the game if both players play optimally.
-If G = 0, the second player wins.
-If G > 0, Left wins as the first or second player.
-If G < 0, Right wins as the first or second player.
-If G ‖ 0, (pronounced G is fuzzy with 0) the first player wins.
+- If G = 0, the second player wins.
+- If G > 0, Left wins as the first or second player.
+- If G < 0, Right wins as the first or second player.
+- If G ‖ 0, (pronounced G is fuzzy with 0) the first player wins.
 
-Addition on games is defined as:
-G + H = {GL_1+H, GL_2+H, ... | GR_1+H, GR_2+H, ...}
-Negation on games is defined as:
--G = {-GR_1, -GR_2, ... | -GL_1, -GL_2, ...}
+Addition on games is defined as:\
+G + H = {GL_1+H, GL_2+H, ... | GR_1+H, GR_2+H, ...}\
+Negation on games is defined as:\
+-G = {-GR_1, -GR_2, ... | -GL_1, -GL_2, ...}\
 Multiplication and division are also defined, but that is out of scope for this project
 
 But in practice, many games can be simplified to numerical values where the normal rules of addition and negation apply.
 Examples:
-{|} = 0
-{n|} = n+1 where n >= 0
-{|n} = n-1 where n <= 0
-{n|n+1} = (2n+1)/2 where n >= 0
-{n-1|n} = (2n-1)/2 where n <= 0
+- {|} = 0
+- {n|} = n+1 where n >= 0
+- {|n} = n-1 where n <= 0
+- {n|n+1} = (2n+1)/2 where n >= 0
+- {n-1|n} = (2n-1)/2 where n <= 0
 
 This makes CGT useful in practice for analysis of games which decompose into independent sub-games. 
 For example, assume that the expression b^d approximates the search tree size required to solve a game G, where b is the average branching factor of the tree and d is the average depth of the leaf nodes.
@@ -61,14 +61,11 @@ This is a commonly used game for teaching CGT as you can easily construct variou
 ⬜\
 ⬜ = 1
 
-
 ⬜⬜ = -1
-
 
 ⬜\
 ⬜\
 ⬜⬜ = {-1,0|1} = 1/2
-
 
 ⬜\
 ⬜⬜ = {0|0} = * (pronounced star, is fuzzy with 0)
@@ -80,7 +77,6 @@ A move consists of choosing any point on the board, and the move causes that poi
 There is an initial 'poisoned square' as the bottom left point on the board which neither player can make a move on.
 Example 3x4 game:
 
-
 ⬜⬜⬜⬜\
 ⬜⬜⬜⬜\
 🟩⬜⬜⬜
@@ -90,7 +86,6 @@ Player 1 moves at (1,1):
 ⬜\
 ⬜\
 🟩⬜⬜⬜
-
 
 Player 2 moves at (0,1):
 
@@ -127,14 +122,17 @@ Hex is the final game implemented in this course project, and was specifically r
 Hex is a partisan game played on a four-sided board made up of hexagons, where the black tries to connect the top of the board to the bottom, and white tries to connect the left side of the board to the right. 
 
 Example 3x3 board:\
+<pre>
 ⬡ ⬡ ⬡\
-\_⬡ ⬡ ⬡\
-\_\_⬡ ⬡ ⬡
-This would be considered a win for black:
-Example 3x3 board:\
+  ⬡ ⬡ ⬡\
+    ⬡ ⬡ ⬡\
+</pre>
+This would be considered a win for black:\
+<pre>
 ⬡ ⬤ ◯\
-\_◯ ⬤ ⬤\
-\_\_⬡ ◯ ⬤
+  ◯ ⬤ ⬤\
+    ⬡ ◯ ⬤
+</pre>
 
 The legal moves for each player in Hex is simply the empty points on the board, however the terminal condition of the game is complicated. In all the games implemented up to this point, the game is played until there are no moves left at which point the last player to have moved wins. In Hex, the terminal condition is connected the sides of the board rather than just running out of move. Fortunately, we can represent the special termination condition when generating the legal moves after a move is played. If no side connected is made, the legal moves are all the empty points on the board. If a side connection is found, then there are no legal moves. I used the SimpleGraph library in mathlib to check for side connections which was a very interesting learning experience.
 
