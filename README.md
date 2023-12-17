@@ -24,11 +24,15 @@ Here is some basic terminology and notation used in CGT:
 - G = {GL_1, GL_2, ... | GR_1, GR_2, ...} is the notation for a game G where Left can move to game GL_1 or GL_2 etc. and Right can move to GR_1 or GR_2 etc.
 
 The value of a game corresponds to the outcome of the game if both players play optimally.
-- If G = 0, the second player wins.
+- If G ≈ 0, the second player wins.
 - If G > 0, Left wins as the first or second player.
 - If G < 0, Right wins as the first or second player.
-- If G ‖ 0, (pronounced G is fuzzy with 0) the first player wins.
-
+- If G ≥ 0, Left wins as the second player.
+- If G ≤ 0, Right wins as the second player.
+- If G ‖ 0, (pronounced is fuzzy with) the first player wins.
+- If G ⧏ 0, (pronounced less than or fuzzy with) Right wins as the first player
+- If G ⧐ 0, (pronounced more than or fuzzy with) Left wins as the first player
+ 
 Addition on games is defined as:\
 G + H = {GL_1+H, GL_2+H, ... | GR_1+H, GR_2+H, ...}\
 Negation on games is defined as:\
@@ -94,7 +98,7 @@ Player 2 moves at (0,1):
 Player 1 moves at (1,0) and wins.
 
 In the implementation of Chomp, I used a Finset of (ℤ × ℤ) points to represent the points on the board, and the poisoned square was excluded as it is not a legal move.
-To implement the rules of Chomp, I used the Finset.filter functionality to remove any points above or to the right of a move.
+To implement the rules of Chomp, I used the Finset.filter function to remove any points above or to the right of a move.
 
 The next game implemented is Linear Clobber, a one dimensional variation of the game Clobber. Linear Clobber is a partisan game where the game starts with all the black and white stones already placed on the board.
 Players then make moves by 'clobbering' the opponent stones, where they move on of their stones onto an adjacent opponent stone, capturing it.
@@ -131,6 +135,33 @@ This would be considered a win for black as there is a connection from top to bo
 &nbsp;&nbsp;&nbsp;&nbsp;⬡ ◯ ⬤
 
 The legal moves for each player in Hex is simply the empty points on the board, however the terminal condition of the game is complicated. In all the games implemented up to this point, the game is played until there are no moves left at which point the last player to have moved wins. In Hex, the terminal condition is connected the sides of the board rather than just running out of move. Fortunately, we can represent the special termination condition when generating the legal moves after a move is played. If no side connected is made, the legal moves are all the empty points on the board. If a side connection is found, then there are no legal moves. I used the SimpleGraph library in mathlib to check for side connections which was a very interesting learning experience.
+
+# Future work
+
+Define common notation:
+- star
+- up
+- down
+Implement more games:
+- Chop
+- Cut cake
+- Hackenbush
+- Y
+- Toads and frogs
+Possible proofs:
+- A square Chomp board ≈ star
+- You cannot draw in Hex
+- Zermello's theorem
+Speed up positional evaluation by:
+- Identifying and removing dominated game choices
+- Identifying and removing cancelling pairs of games (G-G≈0)
+- Break up games into independent subgames and take the sum
+- Some form of memoization (avoid redundantly recomputing already solved subgames)
+- Implement an efficient graph search algorithm for things like terminal checking in Hex, or splitting up a domineering board
+Miscellaneous:
+- Create a function which outputs actual game value instead of just deciding equality
+- Custom printing functions for games
+- Temperature, hot games
 
 # Bibliography
 
