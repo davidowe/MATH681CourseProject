@@ -147,4 +147,8 @@ def SymTwoL : Board := {(0,2),
 #eval Chomp TwoByTwo ≈ Chomp SymTwoL
 #eval Chomp TwoByTwo ⧏ Chomp SymTwoL
 
+-- Evaluating four by four takes a while
+#eval Chomp FourByFour ≈ 0
+#eval Chomp FourByFour ⧏ 0
+
 end Chomp
