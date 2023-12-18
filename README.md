@@ -168,5 +168,4 @@ Miscellaneous:
 1. Conway, John H. 1976. On Numbers and Games. London: Academic Press.
 2. Berlekamp, Elwyn & Wolfe, David. 1994. Mathematical Go - chilling gets the last point. 10.1201/9781439863558. 
 3. Mueller, Martin. 1999. Decomposition search: a combinatorial games approach to game tree search, with applications to solving go endgames. In Proceedings of the 16th international joint conference on Artifical intelligence - Volume 1 (IJCAI'99). 578–583.
-4. Albert, Michael & Grossman, J.P. & Nowakowski, Richard & Wolfe, David. 2005. An introduction to Clobber. Integers. 5. 
-5. Demer, Eric & Selinger, Peter & Wang, Kyle. 2021. All passable games are realizable as monotone set coloring games.
+4. Albert, Michael & Grossman, J.P. & Nowakowski, Richard & Wolfe, David. 2005. An introduction to Clobber. Integers. 5.

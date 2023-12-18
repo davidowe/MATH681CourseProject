@@ -4,8 +4,8 @@ namespace PGame
 namespace Chomp
 
 /-
-CGT implementation of the game of Chomp
-Chomp is a two player impartial game played with a set of contiguous points
+CGT implementation of the game of Chomp.
+Chomp is a two player impartial game played with a set of contiguous points.
 Games typically start out on rectangular boards such as:
 ⬜⬜⬜⬜
 ⬜⬜⬜⬜

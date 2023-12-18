@@ -95,8 +95,8 @@ def whiteMoves (b : Board) : Finset (ℤ × ℤ) :=
   (Finset.image (Prod.mk (-1)) (b.whitePieces ∩ b.blackPieces.map shiftRight)) ∪
   (Finset.image (Prod.mk 1) (b.whitePieces ∩ b.blackPieces.map shiftLeft))
 
--- Make a move by erasing the moved piece, inserting a piece where it moved, and erasing
--- the clobbered opponent piece
+-- Make a move by erasing the moved piece, inserting a piece where it moved, and erasing the
+-- clobbered opponent piece
 -- Also need to prove that the board remains non-overlapping after a move
 @[simp]
 def makeBlackMove (nb : NonOverlappingBoard) (m : ℤ × ℤ) : NonOverlappingBoard :=

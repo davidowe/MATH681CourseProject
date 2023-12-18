@@ -256,6 +256,6 @@ def ex1 : HexBoard :=
 #eval hex EmptyThreeByThree ⧏ 0
 
 -- Future work could include implementing a more efficient pathfinding algorithm for determining
--- whether two points are reachable from each other
+-- whether two points are reachable from each other.
 
 end Hex
