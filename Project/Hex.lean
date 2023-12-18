@@ -226,11 +226,23 @@ def EmptyThreeByThree : HexBoard :=
 -- You can fill in the board with black and white pieces and evaluate:
 /-
      B B
-   ⬡ ⬡ ⬡ W
-  W W B B W
-   W W ⬡ ⬡
+   W ⬡ W W
+  W ⬡ B ⬡ W
+   W W B W
        B B
 -/
+def ex1 : HexBoard :=
+  {
+    empty := {(0,1),(1,2),(2,1)}
+    black := {(0,-1), (1,-1), (1,3), (2,3), (1,0),(1,1)}
+    white := {(-1,0), (-1,1), (3,1), (3,2), (0,0), (0,2), (2,0), (2,2)}
+    N := {val := (1,3), property := by apply Finset.insert_eq_self.mp rfl}
+    S := {val := (0,-1), property := by apply Finset.insert_eq_self.mp rfl}
+    E := {val := (3,1), property := by apply Finset.insert_eq_self.mp rfl}
+    W := {val := (-1,0), property := by apply Finset.insert_eq_self.mp rfl}
+  }
+
+/-
 def ex1 : HexBoard :=
   {
     empty := {(1,0), (2,0), (0,2), (1,2), (2,2)}
@@ -241,6 +253,7 @@ def ex1 : HexBoard :=
     E := {val := (3,1), property := by apply Finset.insert_eq_self.mp rfl}
     W := {val := (-1,0), property := by apply Finset.insert_eq_self.mp rfl}
   }
+-/
 
 -- Unfortunately, the SimpleGraph.Reachable implementation in Mathlib is incredibly inefficient to
 -- compute, as it enumerates every possible walk between two points
