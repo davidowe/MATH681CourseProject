@@ -11,7 +11,7 @@ Games typically start out on rectangular boards such as:
 ⬜⬜⬜⬜
 🟩⬜⬜⬜
 Where the bottom right point is 'poisoned' and can never be removed.
-A player makes a move by chosing a point to remove, which results in every
+A player makes a move by choosing a point to remove, which results in every
 point above or to the right of the move to also be removed.
 For example:
 Player 1 moves on the point (1,1):

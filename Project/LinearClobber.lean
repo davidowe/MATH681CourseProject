@@ -19,7 +19,7 @@ White moves:
 White wins as there are no legal moves left for black.
 
 This is an interesting game for CGT analysis as games tend to decompose into independent
-subgames very quickly, giving a large adge to using CGT analysis over traditional search.
+subgames very quickly, giving a large advantage to using CGT analysis over traditional search.
 Another interesting property of Clobber is that it is an all-small game, which means
 that the value of any position in Clobber is infinitesimal.
 I chose Linear Clobber over normal 2d Clobber because the implementation would be very

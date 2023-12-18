@@ -23,7 +23,7 @@ Fortunately, we can represent the special termination condition when generating 
 moves after a move is played.
 If no side connected is made, the legal moves are all the empty points on the board.
 If a side connection is found, then there are no legal moves.
-I used the SimpleGraph library in mathlib to check for side connections.
+I used the SimpleGraph library in Mathlib to check for side connections.
 
 Set up the board as follows:
 Index the points on the board by the top-left to bottom-right diagonal column × the horizontal row
@@ -242,14 +242,15 @@ def ex1 : HexBoard :=
     W := {val := (-1,0), property := by apply Finset.insert_eq_self.mp rfl}
   }
 
--- Unfortunetly, the SimpleGraph.Reachable implementation in Mathlib is incredibly inefficient to
+-- Unfortunately, the SimpleGraph.Reachable implementation in Mathlib is incredibly inefficient to
 -- compute, as it enumerates every possible walk between two points
--- This makes hex evaluation very slow (but it will eventually finish)
+-- This makes hex evaluation very slow
 #eval hex ex1 ≈ 0
 #eval hex ex1 < 0
 #eval hex ex1 > 0
 #eval hex ex1 ⧏ 0
 
+-- An empty 3x3 board should take a few milliseconds for any decent search algorithm to solve
 #eval hex EmptyThreeByThree ≈ 0
 #eval hex EmptyThreeByThree < 0
 #eval hex EmptyThreeByThree > 0

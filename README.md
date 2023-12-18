@@ -3,7 +3,7 @@ By Owen Randall
 
 # Combinatorial Game Theory (CGT)
 
-CGT was first introduced by John Conway in *On Numbers and Games* [1] where the structure of a combinatoral game was first formalized. 
+CGT was first introduced by John Conway in *On Numbers and Games* [1] where the structure of a combinatorial game was first formalized. 
 An interesting property of this formalization is that we are now able to attribute values to game positions, which describe the outcome of optimal play on the position.
 Using these values, a partial ordering of games can be constructed, and arithmetic can be performed to determine the values of compositions of games.
 
@@ -50,15 +50,15 @@ Examples:
 This makes CGT useful in practice for analysis of games which decompose into independent sub-games. 
 For example, assume that the expression b^d approximates the search tree size required to solve a game G, where b is the average branching factor of the tree and d is the average depth of the leaf nodes.
 Now lets say this game decomposes into two equal independent subgames, CGT analysis allows us to cut the search tree size down from b^d to 2*(b/2)^d, and that is assuming there are no more game decompositions to be made.
-A good practical example of CGT analysis exponentially outpreforming traditional search was made in the PhD thesis of U of A Professor Martin Mueller [3].
+A good practical example of CGT analysis exponentially outperforming traditional search was made in the PhD thesis of U of A Professor Martin Mueller [3].
 
-There is much more to CGT, such as temperature, infinitesimals, tracendentals, ordinals and more, but none of this is necessary knowledge to understand the basics of CGT.
+There is much more to CGT, such as temperature, infinitesimals, transcendentals, ordinals and more, but none of this is necessary knowledge to understand the basics of CGT.
 
 # Games Implemented
 
 Looking through the existing CGT library in Mathlib, I saw that there was only one game implemented so far, which is understandable as the library is quite small at this point.
 There are comments throughout several files in the library calling stating that the future work for this library should be to implement more games (specifically hex was mentioned), so I knew this would be my course project.
-The existing game is called Domineering, a partisan game where players take turn placing 2x1 or 1x2 dominoe pieces until no legal moves are remaining.
+The existing game is called Domineering, a partisan game where players take turn placing 2x1 or 1x2 domino pieces until no legal moves are remaining.
 This is a commonly used game for teaching CGT as you can easily construct various numbers for example:
 (⬜ represents an empty square of a domineering board)
 
@@ -77,7 +77,7 @@ This is a commonly used game for teaching CGT as you can easily construct variou
 I wanted to implement more challenging games than Domineering for my course project, but I figured I should start off with an easy game.
 The first game implemented is an impartial game called Chomp, where players take turns removing chunks of the board until there is nothing left.
 The game normally starts out as a rectangular board.
-A move consists of choosing any point on the board, and the move causes that point, and every point above or to the right of the move to disapear.
+A move consists of choosing any point on the board, and the move causes that point, and every point above or to the right of the move to disappear.
 There is an initial 'poisoned square' as the bottom left point on the board which neither player can make a move on.
 Example 3x4 game:
 
@@ -111,7 +111,7 @@ White moves:\
 \_◯◯\_⬤⬤\
 White wins as there are no legal moves left for black.
 
-This is an interesting game for CGT analysis as games tend to decompose into independent subgames very quickly, giving a large adge to using CGT analysis over traditional search.
+This is an interesting game for CGT analysis as games tend to decompose into independent subgames very quickly, giving a large advantage to using CGT analysis over traditional search.
 Another interesting property of Clobber is that it is an all-small game [4], which means that the value of any position in Clobber is infinitesimal.
 I chose Linear Clobber over normal 2d Clobber because the implementation would be very similar, but much shorter and less tedious.
 I am in the midst of completing a paper proving that any position of the form (◯⬤)^n ‖ 0, where n > 0 and n ≠ 3.
@@ -134,7 +134,7 @@ This would be considered a win for black as there is a connection from top to bo
 &nbsp;&nbsp;◯ ⬤ ⬤\
 &nbsp;&nbsp;&nbsp;&nbsp;⬡ ◯ ⬤
 
-The legal moves for each player in Hex is simply the empty points on the board, however the terminal condition of the game is complicated. In all the games implemented up to this point, the game is played until there are no moves left at which point the last player to have moved wins. In Hex, the terminal condition is connected the sides of the board rather than just running out of move. Fortunately, we can represent the special termination condition when generating the legal moves after a move is played. If no side connected is made, the legal moves are all the empty points on the board. If a side connection is found, then there are no legal moves. I used the SimpleGraph library in mathlib to check for side connections which was a very interesting learning experience.
+The legal moves for each player in Hex is simply the empty points on the board, however the terminal condition of the game is complicated. In all the games implemented up to this point, the game is played until there are no moves left at which point the last player to have moved wins. In Hex, the terminal condition is connected the sides of the board rather than just running out of move. Fortunately, we can represent the special termination condition when generating the legal moves after a move is played. If no side connected is made, the legal moves are all the empty points on the board. If a side connection is found, then there are no legal moves. I used the SimpleGraph library in Mathlib to check for side connections which was a very interesting learning experience.
 
 # Future work
 
@@ -167,5 +167,5 @@ Miscellaneous:
 
 1. Conway, John H. 1976. On Numbers and Games. London: Academic Press.
 2. Berlekamp, Elwyn & Wolfe, David. 1994. Mathematical Go - chilling gets the last point. 10.1201/9781439863558. 
-3. Mueller, Martin. 1999. Decomposition search: a combinatorial games approach to game tree search, with applications to solving go endgames. In Proceedings of the 16th international joint conference on Artifical intelligence - Volume 1 (IJCAI'99). 578–583.
+3. Mueller, Martin. 1999. Decomposition search: a combinatorial games approach to game tree search, with applications to solving go endgames. In Proceedings of the 16th international joint conference on Artificial Intelligence - Volume 1 (IJCAI'99). 578–583.
 4. Albert, Michael & Grossman, J.P. & Nowakowski, Richard & Wolfe, David. 2005. An introduction to Clobber. Integers. 5.
