@@ -162,22 +162,26 @@ Define common notation:
 - up
 - down
 - Construct/print games in the form {...|...}
+
 Implement more games:
 - Chop
 - Cut cake
 - Hackenbush
 - Y
 - Toads and frogs
+
 Possible proofs:
 - A square Chomp board ≈ star
 - You cannot draw in Hex
 - Zermello's theorem
+
 Speed up positional evaluation by:
 - Identifying and removing dominated game choices
 - Identifying and removing cancelling pairs of games (G-G≈0)
 - Break up games into independent subgames and take the sum
 - Some form of memoization (avoid redundantly recomputing already solved subgames)
 - Implement an efficient graph search algorithm for things like terminal checking in Hex, or splitting up a domineering board
+
 Miscellaneous:
 - Create a function which outputs actual game value instead of just deciding equality
 - Custom printing functions for games
