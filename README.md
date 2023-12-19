@@ -174,6 +174,7 @@ Possible proofs:
 - A square Chomp board ≈ star
 - You cannot draw in Hex
 - Zermello's theorem
+- Linear clobber formulas from _An Introduction to Clobber_
 
 Speed up positional evaluation by:
 - Identifying and removing dominated game choices
