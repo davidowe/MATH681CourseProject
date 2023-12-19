@@ -1,6 +1,13 @@
 # MATH 681 - Combinatorial Game Theory Implementations
 By Owen Randall
 
+# Index
+
+This project implements three new combinatorial games in Lean4:
+1. Chomp (https://github.com/davidowe/MATH681CourseProject/blob/master/Project/Chomp.lean)
+2. Linear Clobber (https://github.com/davidowe/MATH681CourseProject/blob/master/Project/LinearClobber.lean)
+3. Hex (https://github.com/davidowe/MATH681CourseProject/blob/master/Project/Hex.lean)
+
 # Combinatorial Game Theory (CGT)
 
 CGT was first introduced by John Conway in *On Numbers and Games* [1] where the structure of a combinatorial game was first formalized. 
@@ -74,6 +81,10 @@ This is a commonly used game for teaching CGT as you can easily construct variou
 ⬜\
 ⬜⬜ = {0|0} = * (pronounced star, is fuzzy with 0)
 
+# Chomp
+
+https://github.com/davidowe/MATH681CourseProject/blob/master/Project/Chomp.lean
+
 I wanted to implement more challenging games than Domineering for my course project, but I figured I should start off with an easy game.
 The first game implemented is an impartial game called Chomp, where players take turns removing chunks of the board until there is nothing left.
 The game normally starts out as a rectangular board.
@@ -100,6 +111,10 @@ Player 1 moves at (1,0) and wins.
 In the implementation of Chomp, I used a Finset of (ℤ × ℤ) points to represent the points on the board, and the poisoned square was excluded as it is not a legal move.
 To implement the rules of Chomp, I used the Finset.filter function to remove any points above or to the right of a move.
 
+# Linear Clobber
+
+https://github.com/davidowe/MATH681CourseProject/blob/master/Project/LinearClobber.lean
+
 The next game implemented is Linear Clobber, a one dimensional variation of the game Clobber. Linear Clobber is a partisan game where the game starts with all the black and white stones already placed on the board.
 Players then make moves by 'clobbering' the opponent stones, where they move on of their stones onto an adjacent opponent stone, capturing it.
 
@@ -122,6 +137,10 @@ The positions of pieces are stored as a Finset of integers, and moves are repres
 I then implemented a black move by erasing the stone being moved from the black stones, inserting a stone at the position the stone would be moved to, and removing the white stone at the point where the black stone moved to (vice-versa for white moves).
 Proving turn bounds and shortness were difficult due to these complicated rules so I needed to implement many lemmas and theorems in order to break up the problem into smaller chunks.
 
+# Hex
+
+https://github.com/davidowe/MATH681CourseProject/blob/master/Project/Hex.lean
+
 Hex is the final game implemented in this course project, and was specifically requested by the comments in the existing CGT library.
 Hex is a partisan game played on a four-sided board made up of hexagons, where the black tries to connect the top of the board to the bottom, and white tries to connect the left side of the board to the right. 
 
@@ -142,6 +161,7 @@ Define common notation:
 - star
 - up
 - down
+- Construct/print games in the form {...|...}
 Implement more games:
 - Chop
 - Cut cake
